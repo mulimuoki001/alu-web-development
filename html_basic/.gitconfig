@@ -1,0 +1,12 @@
+[user]
+        name = mulimuoki001
+        email = b.muoki@alustudent.com
+[credential]
+        helper = cache --timeout=10800
+[remote "origin"]
+  tagopt = --tags
+
+  # modified this line:
+  fetch = +refs/archive/*:refs/archive/*
+
+  push = +refs/archive/*:refs/archive/*
