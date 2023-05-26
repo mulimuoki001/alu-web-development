@@ -14,3 +14,55 @@ aside {
     flex: 1;
     overflow-y: auto;
 }
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+
+  header ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  header li {
+    margin-bottom: 10px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
+
+  main {
+    margin: 10px;
+  }
+
+  article {
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  ul {
+    font-size: 14px;
+  }
+
+  aside {
+    font-size: 14px;
+  }
+}
+
