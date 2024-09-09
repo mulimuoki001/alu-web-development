@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
-
+"""BasicCache defines:"""
 import importlib
 
 BaseCaching = importlib.import_module("base_caching").BaseCaching
+"""BasicCache class defines:
+- constants of your caching system
+- where your data are stored (in a dictionary)
+"""
 
 
 class BasicCache(BaseCaching):
