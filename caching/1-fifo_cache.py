@@ -29,7 +29,8 @@ class FIFOCache(BaseCaching):
             if key in self.cache_data:
                 self.cache_data.pop(key)
             else:
-                print("DISCARD: {}".format(self.cache_data.popitem(last=False)[0]))
+                key, _ = self.cache_data.popitem(last=False)
+                print("DISCARD: {key}")
         self.cache_data[key] = item
 
     def get(self, key):
