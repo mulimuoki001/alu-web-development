@@ -17,10 +17,10 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
-@app.errorhandler(200)
+@app.errorhandler(404)
 def not_found(error) -> str:
     """Not found handler"""
-    return jsonify({"error": "Not found"}), 200
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
