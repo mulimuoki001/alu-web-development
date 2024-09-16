@@ -9,7 +9,8 @@ from typing import TypeVar
 class BasicAuth(Auth):
     """Basic Auth class"""
 
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
         """Extract base64"""
         if authorization_header is None:
             return None
@@ -28,7 +29,8 @@ class BasicAuth(Auth):
         if type(base64_authorization_header) != str:
             return None
         try:
-            return base64.b64decode(base64_authorization_header).decode("utf-8")
+            return base64.b64decode(
+                base64_authorization_header).decode("utf-8")
         except Exception:
             return None
 
