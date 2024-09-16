@@ -8,8 +8,7 @@ import base64
 class BasicAuth(Auth):
     """Basic Auth class"""
 
-    def extract_base64_authorization_header(self,
-                                            authorization_header: str) -> str:
+    def extract_base64_authorization_header(self, authorization_header: str) -> str:
         """Extract base64"""
         if authorization_header is None:
             return None
@@ -28,8 +27,7 @@ class BasicAuth(Auth):
         if type(base64_authorization_header) != str:
             return None
         try:
-            return base64.b64decode(
-                base64_authorization_header).decode("utf-8")
+            return base64.b64decode(base64_authorization_header).decode("utf-8")
         except Exception:
             return None
 
@@ -45,3 +43,24 @@ class BasicAuth(Auth):
             return None, None
         user_pass = decoded_base64_authorization_header.split(":", 1)
         return user_pass[0], user_pass[1]
+
+    def user_object_from_credentials(
+        self, user_email: str, user_pwd: str
+    ) -> TypeVar("User"):
+        """User object from credentials"""
+        if user_email is None or type(user_email) != str:
+            return None
+        if user_pwd is None or type(user_pwd) != str:
+            return None
+        from models.user import User
+
+        try:
+            user = User.search({"email": user_email})
+            if len(user) == 0:
+                return None
+            user = user[0]
+            if user.is_valid_password(user_pwd):
+                return user
+            return None
+        except Exception:
+            return None
