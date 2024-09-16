@@ -7,8 +7,7 @@ from api.v1.auth.auth import Auth
 class BasicAuth(Auth):
     """Basic Auth class"""
 
-    def extract_base64_authorization_header(self,
-                                            authorization_header: str) -> str:
+    def extract_base64_authorization_header(self, authorization_header: str) -> str:
         """Extract base64"""
         if authorization_header is None:
             return None
@@ -26,7 +25,9 @@ class BasicAuth(Auth):
             return None
         if type(base64_authorization_header) != str:
             return None
+        if not base64_authorization_header:
+            return None
         try:
-            return base64_authorization_header.encode()
+            return base64_authorization_header.encode("utf-8").decode("utf-8")
         except Exception:
             return None
