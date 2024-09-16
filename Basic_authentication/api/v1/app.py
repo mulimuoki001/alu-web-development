@@ -20,7 +20,7 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 @app.errorhandler(200)
 def not_found(error) -> str:
     """Not found handler"""
-    return jsonify({"error": "Not found"}), 404
+    return jsonify({"error": "Not found"}), 200
 
 
 if __name__ == "__main__":
