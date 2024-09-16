@@ -1,9 +1,13 @@
+#!/usr/bin/env python3
+
+
+"""
+Auth class
+"""
 from flask import request
 from api.v1.views import app_views
 from models.user import User
-from typing import List
-from flask import jsonify
-from models import storage
+from typing import List, TypeVar
 
 
 class Auth:
