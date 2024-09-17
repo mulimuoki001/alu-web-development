@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """ Module of Session Authentication
 """
-from api.v1.auth.auth import Auth
+
 from api.v1.views import app_views
 from flask import request, abort
 from models.user import User
 from flask import jsonify
 import os
-
-auth = Auth()
 
 
 @app_views.route("/auth_session/login", methods=["POST"], strict_slashes=False)
