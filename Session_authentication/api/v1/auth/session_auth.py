@@ -2,10 +2,7 @@
 """ Module of Session Authentication
 """
 from flask import request
-
-import importlib
-
-Auth = importlib.import_module("api.v1.auth.auth").Auth
+from api.v1.auth.auth import Auth
 from api.v1.views import app_views
 from models.user import User
 import uuid
