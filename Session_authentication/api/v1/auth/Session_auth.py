@@ -10,10 +10,6 @@ from models.user import User
 class SessionAuth(Auth):
     """
     Session Auth class
-    args:
-
-    methods:
-        create_session(self, user_id: str = None)
     """
 
     pass
