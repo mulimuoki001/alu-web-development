@@ -10,6 +10,8 @@ from models.user import User
 from typing import List, TypeVar
 import os
 
+__all__ = ["Auth"]
+
 
 class Auth:
     """Auth class"""
