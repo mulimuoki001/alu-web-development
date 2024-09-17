@@ -50,5 +50,11 @@ class SessionAuth(Auth):
         user_id = self.user_id_for_session_id(session_id)
         if user_id is None:
             return False
-        SessionAuth.user_id_by_session_id.pop(session_id)
+        user = User.get(user_id)
+        if user is None:
+            return False
+        try:
+            del SessionAuth.user_id_by_session_id[session_id]
+        except KeyError:
+            pass
         return True
