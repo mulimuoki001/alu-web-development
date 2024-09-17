@@ -8,6 +8,7 @@ from models.user import User
 import uuid
 from flask import jsonify
 import os
+import abort
 
 auth = Auth()
 
@@ -44,3 +45,17 @@ def login() -> str:
     response = jsonify(found_user.to_json())
     response.set_cookie(session_name, session_id)
     return response
+
+
+@app_views.route("/auth_session/logout", methods=["DELETE"], strict_slashes=False)
+def logout() -> str:
+    """DELETE /api/v1/auth_session/logout
+    Return:
+    - empty JSON
+    """
+    from api.v1.app import auth
+
+    if auth.destroy_session(request):
+        return abort(404)
+    else:
+        return jsonify({}), 200
