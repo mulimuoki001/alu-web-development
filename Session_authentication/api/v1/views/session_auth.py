@@ -7,6 +7,7 @@ from flask import request
 from models.user import User
 import uuid
 from flask import jsonify
+import os
 
 auth = Auth()
 
