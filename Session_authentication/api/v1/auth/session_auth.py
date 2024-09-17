@@ -3,7 +3,7 @@
 """
 from flask import request
 
-from api.v1.auth.auth import Auth
+
 from api.v1.views import app_views
 from models.user import User
 import uuid
@@ -42,6 +42,8 @@ class SessionAuth(Auth):
 
     def destroy_session(self, request=None):
         """Destroy session"""
+        from api.v1.app import auth
+
         if request is None:
             return False
         session_id = self.session_cookie(request)
