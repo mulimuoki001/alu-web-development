@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
-
+from bcrypt import hashpw, gensalt
 
 from user import User
 
@@ -86,7 +86,8 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """
-        Updates a user in the database based on the provided keyword arguments.
+        Updates a user in the database
+        based on the provided keyword arguments.
 
         Args:
             user_id (int): ID of the user to update.
@@ -100,3 +101,16 @@ class DB:
                 raise ValueError
 
         self._session.commit()
+
+    def _hash_password(self, password: str) -> str:
+        """
+        Hashes a password using bcrypt.
+
+        Args:
+            password (str): Password to hash.
+
+        Returns:
+            str: Hashed password.
+        """
+
+        return hashpw(password.encode("utf-8"), gensalt()).decode("utf-8")
