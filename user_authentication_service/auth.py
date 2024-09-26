@@ -5,7 +5,7 @@
 from bcrypt import hashpw, gensalt
 
 
-def _hash_password(self, password: str) -> str:
+def _hash_password(password: str) -> str:
     """
     Hashes a password using bcrypt.
 
