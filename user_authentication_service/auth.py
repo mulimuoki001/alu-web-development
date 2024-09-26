@@ -5,7 +5,7 @@
 from bcrypt import hashpw, gensalt, checkpw
 from sqlalchemy.orm.exc import NoResultFound
 from user import User
-from uuid import uuid4
+import uuid
 
 from db import DB
 
@@ -59,7 +59,7 @@ class Auth:
             str: Random UUID.
         """
 
-        return str(uuid4())
+        return str(uuid.uuid4())
 
 
 def _hash_password(password: str) -> str:
