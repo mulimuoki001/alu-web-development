@@ -4,6 +4,7 @@
 """Hashed password management for the 'users' table."""
 from bcrypt import hashpw, gensalt
 from sqlalchemy.orm.exc import NoResultFound
+from user import User
 
 from db import DB
 
@@ -14,7 +15,7 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> None:
+    def register_user(self, email: str, password: str) -> User:
         """
         Registers a new user in the database.
 
