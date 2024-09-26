@@ -5,7 +5,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.exc import valueError
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -98,6 +98,6 @@ class DB:
             if hasattr(user, key):
                 setattr(user, key, value)
             else:
-                raise InvalidRequestError
+                raise valueError
 
         self._session.commit()
