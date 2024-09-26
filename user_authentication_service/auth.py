@@ -2,7 +2,7 @@
 
 
 """Hashed password management for the 'users' table."""
-from bcrypt import hashpw, gensalt
+from bcrypt import hashpw, gensalt, checkpw
 from sqlalchemy.orm.exc import NoResultFound
 from user import User
 
@@ -29,6 +29,26 @@ class Auth:
             raise ValueError("User {} already exists".format(email))
         except NoResultFound:
             self._db.add_user(email, _hash_password(password))
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """
+        Validates a user's login credentials.
+
+        Args:
+            email (str): User's email address.
+            password (str): Password for the user.
+
+        Returns:
+            bool: True if the login is valid, False otherwise.
+        """
+
+        try:
+            user = self._db.find_user_by(email=email)
+            return checkpw(
+                password.encode("utf-8"), user.hashed_password.encode("utf-8")
+            )
+        except NoResultFound:
+            return False
 
 
 def _hash_password(password: str) -> str:
