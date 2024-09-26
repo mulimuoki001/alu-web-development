@@ -5,8 +5,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import valueError
 from sqlalchemy.orm.exc import NoResultFound
+from exceptions import ValueError
 
 
 from user import User
