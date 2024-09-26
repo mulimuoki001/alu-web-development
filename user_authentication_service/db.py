@@ -84,3 +84,18 @@ class DB:
             raise NoResultFound
 
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        Updates a user in the database based on the provided keyword arguments.
+
+        Args:
+            user_id (int): ID of the user to update.
+            **kwargs: Keyword arguments to update the user with.
+        """
+        user = self.find_user_by(id=user_id)
+        for key, value in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+
+        self._session.commit()
