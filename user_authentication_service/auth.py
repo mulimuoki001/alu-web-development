@@ -53,22 +53,22 @@ class Auth:
 
     def create_session(self, email: str) -> str:
         """
-        Creates a session for a user.
+        Creates a new session for the user with the given email.
 
         Args:
-            email (str): User's email address.
+            email (str): Email address of the user.
 
         Returns:
-            str: Session ID for the user.
+            str: The ID of the newly created session.
         """
 
-        try:
-            user = self._db.find_user_by(email=email)
-            session_id = _generate_uuid()
-            self._db.update_user(user.id, session_id=session_id)
-            return session_id
-        except NoResultFound:
-            return None
+        user = self._db.find_user_by(email=email)
+        if user is None:
+            raise ValueError("User not found")
+
+        session_id = self._generate_uuid()
+        self._db.update_user_session(user.id, session_id)
+        return session_id
 
 
 def _hash_password(password: str) -> str:
