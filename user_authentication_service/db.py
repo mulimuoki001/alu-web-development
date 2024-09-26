@@ -84,20 +84,14 @@ class DB:
 
         return user
 
-    def update_user(self, user_id: int, **kwargs) -> None:
+     def update_user(self, user_id: int, **kwargs) -> None:
         """
-        Updates a user in the database
-        based on the provided keyword arguments.
-
-        Args:
-            user_id (int): ID of the user to update.
-            **kwargs: Keyword arguments to update the user with.
+        update_user.
         """
+        session = self._session
         user = self.find_user_by(id=user_id)
-        for key, value in kwargs.items():
-            if hasattr(user, key):
-                setattr(user, key, value)
-            else:
+        for k, v in kwargs.items():
+            if k not in VALID_FIELDS:
                 raise ValueError
-
-        self._session.commit()
+            setattr(user, k, v)
+        session.commit()
