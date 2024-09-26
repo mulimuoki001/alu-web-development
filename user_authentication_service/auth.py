@@ -51,16 +51,6 @@ class Auth:
         except NoResultFound:
             return False
 
-    def _generate_uuid() -> str:
-        """
-        Generates a random UUID.
-
-        Returns:
-            str: Random UUID.
-        """
-
-        return str(uuid.uuid4())
-
 
 def _hash_password(password: str) -> str:
     """
@@ -74,3 +64,14 @@ def _hash_password(password: str) -> str:
     """
 
     return hashpw(password.encode("utf-8"), gensalt()).decode("utf-8")
+
+
+def _generate_uuid() -> str:
+    """
+    Generates a random UUID.
+
+    Returns:
+        str: Random UUID.
+    """
+
+    return str(uuid.uuid4())
