@@ -51,6 +51,25 @@ class Auth:
         except NoResultFound:
             return False
 
+    def create_session(self, email: str) -> str:
+        """
+        Creates a session for a user.
+
+        Args:
+            email (str): User's email address.
+
+        Returns:
+            str: Session ID for the user.
+        """
+
+        try:
+            user = self._db.find_user_by(email=email)
+            session_id = _generate_uuid()
+            self._db.update_user(user.id, session_id=session_id)
+            return session_id
+        except NoResultFound:
+            return None
+
 
 def _hash_password(password: str) -> str:
     """
@@ -75,3 +94,13 @@ def _generate_uuid() -> str:
     """
 
     return str(uuid.uuid4())
+
+
+email = "bob@bob.com"
+password = "MyPwdOfBob"
+auth = Auth()
+
+auth.register_user(email, password)
+
+print(auth.create_session(email))
+print(auth.create_session("unknown@email.com"))
