@@ -10,6 +10,31 @@ import uuid
 from db import DB
 
 
+def _hash_password(password: str) -> str:
+    """
+    Hashes a password using bcrypt.
+
+    Args:
+        password (str): Password to hash.
+
+    Returns:
+        str: Hashed password.
+    """
+
+    return hashpw(password.encode("utf-8"), gensalt()).decode("utf-8")
+
+
+def _generate_uuid() -> str:
+    """
+    Generates a random UUID.
+
+    Returns:
+        str: Random UUID.
+    """
+
+    return str(uuid.uuid4())
+
+
 class Auth:
     """Auth class to interact with the authentication database."""
 
@@ -64,33 +89,8 @@ class Auth:
 
         try:
             user = self._db.find_user_by(email=email)
-            session_id = _generate_uuid()
-            self._db.update_user(user.id, session_id=session_id)
-            return session_id
+            sess_id = _generate_uuid()
+            self._db.update_user(user.id, session_id=sess_id)
+            return sess_id
         except NoResultFound:
             return None
-
-
-def _hash_password(password: str) -> str:
-    """
-    Hashes a password using bcrypt.
-
-    Args:
-        password (str): Password to hash.
-
-    Returns:
-        str: Hashed password.
-    """
-
-    return hashpw(password.encode("utf-8"), gensalt()).decode("utf-8")
-
-
-def _generate_uuid() -> str:
-    """
-    Generates a random UUID.
-
-    Returns:
-        str: Random UUID.
-    """
-
-    return str(uuid.uuid4())
