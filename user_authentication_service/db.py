@@ -6,7 +6,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
-from exceptions import ValueError
 
 
 from user import User
@@ -98,6 +97,6 @@ class DB:
             if hasattr(user, key):
                 setattr(user, key, value)
             else:
-                raise valueError
+                raise ValueError
 
         self._session.commit()
